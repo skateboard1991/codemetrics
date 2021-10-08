@@ -5,7 +5,7 @@ import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.*
 import com.intellij.ui.DocumentAdapter
-import com.skateboard.codemetrics.checker.JavaStatementChecker
+import com.skateboard.codemetrics.checker.JavaNodeChecker
 import java.awt.FlowLayout
 import javax.swing.JComponent
 import javax.swing.JPanel
@@ -33,11 +33,9 @@ class JavaCodeMetricsInspection : AbstractBaseJavaLocalInspectionTool() {
             override fun visitMethod(method: PsiMethod?) {
                 method?.let { method ->
                     var nodeNum = 0
-                    val statementChecker = JavaStatementChecker()
-                    method.body?.statements?.let {
-                        it.forEach { statement ->
-                            nodeNum += statementChecker.check(statement)
-                        }
+                    val statementChecker = JavaNodeChecker()
+                    method.body?.let {
+                        nodeNum+=statementChecker.check(it)
                     }
                     if (nodeNum + 1 > complexLevel) {
                         holder.registerProblem(
