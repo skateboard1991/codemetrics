@@ -1,0 +1,39 @@
+<idea-plugin>
+    <id>com.skateboard.codemetrics</id>
+    <name>圈复杂度检测</name>
+    <vendor email="skateboard1991@163.com" url="https://github.com/skateboard1991">Github</vendor>
+
+    <description><![CDATA[
+      圈复杂度检测.<br> 添加在
+      <b>Preferences | Editor | Inspections | Java | Probable Bugs</b>.
+    ]]>
+    </description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <localInspection
+                language="JAVA"
+                displayName="Java代码圈复杂度"
+                groupPath="Java"
+                groupBundle="messages.InspectionsBundle"
+                groupKey="group.names.probable.bugs"
+                enabledByDefault="true"
+                level="ERROR"
+                implementationClass="com.skateboard.codemetrics.JavaCodeMetricsInspection"
+        />
+        <localInspection
+                language="kotlin"
+                displayName="Kotlin代码圈复杂度"
+                groupPath="Kotlin"
+                groupBundle="messages.InspectionsBundle"
+                groupKey="group.names.probable.bugs"
+                enabledByDefault="true"
+                level="ERROR"
+                implementationClass="com.skateboard.codemetrics.KTCodeMetricsInspection"/>
+    </extensions>
+</idea-plugin>
